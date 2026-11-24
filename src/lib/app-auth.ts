@@ -6,13 +6,17 @@ import config from '@payload-config'
 export function createAppAuth(collection: 'users') {
   return {
     async currentUser() {
-      const token = (await cookies()).get('app-session')?.value
-      if (!token) return null
-      const payload = await getPayload({ config })
-      const { user } = await payload.auth({
-        headers: new Headers({ Authorization: `JWT ${token}` }),
-      })
-      return user?.collection === collection ? user : null
+      try {
+        const token = (await cookies()).get('app-session')?.value
+        if (!token) return null
+        const payload = await getPayload({ config })
+        const { user } = await payload.auth({
+          headers: new Headers({ Authorization: `JWT ${token}` }),
+        })
+        return user?.collection === collection ? user : null
+      } catch {
+        return null
+      }
     },
     async login(email: string, password: string) {
       const payload = await getPayload({ config })

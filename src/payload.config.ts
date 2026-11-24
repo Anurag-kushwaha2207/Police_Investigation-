@@ -41,5 +41,10 @@ export default buildFigmaConfig({
     defaultLocale: 'en',
   },
   plugins: [mcpPlugin({})],
-  figma: {},
+  figma: {
+    environmentId: process.env.FIGMA_EID || 'preview-env',
+    contentSystemId: process.env.FIGMA_CONTENT_API_CONTENT_SYSTEM_ID || 'preview-system',
+    useContentSystem: Boolean(process.env.FIGMA_CONTENT_API_ACCESS_KEY),
+    storage: Boolean(process.env.FIGMA_CONTENT_API_ACCESS_KEY),
+  },
 })
