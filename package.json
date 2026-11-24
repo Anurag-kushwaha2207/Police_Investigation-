@@ -4,13 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "NODE_OPTIONS=\"${NODE_OPTIONS:-} --no-deprecation\" next dev --port ${PORT:-3000} --hostname ${FIGMA_DEV_SERVER_HOST:-0.0.0.0}",
-    "build": "NODE_OPTIONS=\"${NODE_OPTIONS:-} --no-deprecation\" payload build",
-    "start": "NODE_OPTIONS=\"${NODE_OPTIONS:-} --no-deprecation\" next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "format": "oxfmt",
-    "generate:importmap": "NODE_OPTIONS=\"${NODE_OPTIONS:-} --no-deprecation\" payload generate:importmap",
-    "generate:types": "NODE_OPTIONS=\"${NODE_OPTIONS:-} --no-deprecation\" payload generate:types",
-    "payload": "NODE_OPTIONS=\"${NODE_OPTIONS:-} --no-deprecation\" payload"
+    "generate:importmap": "payload generate:importmap",
+    "generate:types": "payload generate:types",
+    "payload": "payload"
   },
   "dependencies": {
     "@payloadcms/figma": "1.0.0-beta.4",
@@ -40,8 +40,8 @@
     "typescript": "6.0.3"
   },
   "engines": {
-    "node": "^24.22.3 || >=26.13.1",
-    "pnpm": "^9 || ^10 || ^11"
+    "node": ">=20.0.0",
+    "pnpm": ">=9"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

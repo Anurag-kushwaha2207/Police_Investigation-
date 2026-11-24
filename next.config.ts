@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(dirname),
   },
-  output: 'standalone',
+  output: process.env.NETLIFY ? undefined : 'standalone',
   images: {
     loader: 'custom',
     loaderFile: './figma-image-loader.ts',
