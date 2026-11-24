@@ -12,7 +12,8 @@ import { Tags } from './collections/Tags'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-export default buildFigmaConfig({
+const configPromise = buildFigmaConfig({
+  secret: process.env.PAYLOAD_SECRET || 'nyayasetu-jwt-secret-key-32-chars-long-123456',
   admin: {
     user: Admins.slug,
     constrainWidth: true,
@@ -47,4 +48,13 @@ export default buildFigmaConfig({
     useContentSystem: Boolean(process.env.FIGMA_CONTENT_API_ACCESS_KEY),
     storage: Boolean(process.env.FIGMA_CONTENT_API_ACCESS_KEY),
   },
+}).catch((err) => {
+  console.warn('[Payload] Figma backend unavailable; running in preview mode:', err?.message || err)
+  return {
+    secret: process.env.PAYLOAD_SECRET || 'nyayasetu-jwt-secret-key-32-chars-long-123456',
+    admin: { user: Admins.slug },
+    collections: [Admins, Media, Folders, Tags, Users, CaseFiles],
+  } as any
 })
+
+export default configPromise

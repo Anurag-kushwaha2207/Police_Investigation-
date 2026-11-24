@@ -24,7 +24,9 @@ export async function signIn(email: string, password: string, signup = false, na
   }
 }
 export async function signOut() {
-  await appAuth.logout()
+  try {
+    await appAuth.logout()
+  } catch {}
 }
 export async function mutateCase(reference: string, command: CaseAction) {
   try {

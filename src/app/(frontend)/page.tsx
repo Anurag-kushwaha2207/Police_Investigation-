@@ -14,7 +14,12 @@ export default async function HomePage({
   searchParams?: Promise<{ role?: string; demo?: string }>
 }) {
   const params = searchParams ? await searchParams : {}
-  const user = await appAuth.currentUser()
+  let user = null
+  try {
+    user = await appAuth.currentUser()
+  } catch {
+    user = null
+  }
 
   if (!user && !params.role && !params.demo) {
     return <Login />
